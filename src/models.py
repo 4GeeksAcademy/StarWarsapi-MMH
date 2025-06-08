@@ -56,7 +56,7 @@ class Planeta (db.Model):
 
 class Favorito (db.Model):
     id: Mapped[int] = mapped_column(primary_key=True)
-    user_id: Mapped[int]= mapped_column(ForeignKey("user.id"))
+    user_id: Mapped[int]= mapped_column(ForeignKey("user.id")) 
     user=relationship("User" , backref="favoritos")
     personaje_id: Mapped[int]= mapped_column(ForeignKey("personaje.id"),nullable=True)
     personaje= relationship("Personaje" , backref="favoritos")

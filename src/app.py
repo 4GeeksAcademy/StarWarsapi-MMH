@@ -109,18 +109,47 @@ def add_datos(id):
     db.session.commit()
     return jsonify({"msg":"Planeta favorito agregado"}), 201
 
-    
+    # Ruta para agregar favorito people
+
+@app.route('/favoritos/personaje/<int:id>', methods=['POST'])
+def add_datos_personajes(id):
 
     
+    add_favorito = Favorito(
+        user_id=1,
+        personaje_id =id
+    )
+    db.session.add(add_favorito)
+    db.session.commit()
+    return jsonify({"msg":"Personaje favorito agregado"}), 201
 
+# Ruta para eliminar favorito planeta
 
+@app.route('/favoritos/planeta/<int:id>', methods=['DELETE'])
+def delete_dato(id):
 
+    
+    delete_favoritos = Favorito.query.filter_by(
+        user_id=1,
+        planeta_id =id
+    ).first()
+    db.session.delete(delete_favoritos)
+    db.session.commit()
+    return jsonify({"msg":"Personaje planeta favorito eliminado"}), 200
 
+#Ruta para eliminar de people
 
-# Ruta para agregar favorito people
+@app.route('/favoritos/personaje/<int:id>', methods=['DELETE'])
+def delete_datos_personaje(id):
 
+    
+    delete_favorito = Favorito.query.filter_by(
+        user_id=1,
+        personaje_id =id).first()
 
-
+    db.session.delete(delete_favorito)
+    db.session.commit()
+    return jsonify({"msg":"Personaje gente favorito eliminado"}), 201
 
 
 # this only runs if `$ python src/app.py` is executed
